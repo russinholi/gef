@@ -1,4 +1,7 @@
-This is your new Play application
+Projeto de software para Gerenciamento de Farmácias usado como trabalho de Engenharia de Software
 =====================================
 
-This file will be packaged with your application, when using `play dist`.
+Este trabalho é um sistema de controle de contas a pagar, a receber, estoque, gerenciamento
+de clientes e controle de vendas.
+
+
