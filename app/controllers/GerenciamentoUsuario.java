@@ -15,6 +15,19 @@ import views.html.usuario.*;
 
 public class GerenciamentoUsuario extends Controller {
 
+	public static class Login {
+		public String login;
+		public String senha;
+
+		public String validate() {
+			Usuario usuarioLogado = Ebean.find(Usuario.class).where().eq("login", login).eq("senha",senha).findUnique();
+			if (usuarioLogado == null) {
+				return "Usuário/Senha inválido.";
+			}
+			return null;
+		}
+
+	}
 	public static Result index() {
 		List<Usuario> listaUsuarios = Ebean.createQuery(Usuario.class).findList();
 		return ok(index.render(listaUsuarios));
@@ -37,23 +50,21 @@ public class GerenciamentoUsuario extends Controller {
 	}
 
 	public static Result login() {		 
-		return ok(login.render(form(Usuario.class)));
+		return ok(login.render(form(Login.class)));
 	}
 
 
 	public static Result efetuarLogin() {
-		Form<Usuario> form = Form.form(Usuario.class).bindFromRequest();
-		System.out.println("1");
+		Form<Login> form = Form.form(Login.class).bindFromRequest();
 		if (form.hasErrors()) {
 			return badRequest(login.render(form));
 		} else {
-			System.out.println("2");
-		Usuario usuario = form.get();
-		Usuario usuarioLogado = Ebean.find(Usuario.class).where().eq("login", usuario.getLogin()).eq("senha",usuario.getSenha()).findUnique();
-		session().clear();
-		session("login",usuarioLogado.getLogin());
-		session("nomeUsuario", usuarioLogado.getNome());
-		return redirect(routes.Application.index());
+			Login dadosLogin = form.get();
+			Usuario usuarioLogado = Ebean.find(Usuario.class).where().eq("login", dadosLogin.login).eq("senha",dadosLogin.senha).findUnique();
+			session().clear();
+			session("login",usuarioLogado.getLogin());
+			session("nomeUsuario", usuarioLogado.getNome());
+			return redirect(routes.Application.index());
 		}
 	}
 }

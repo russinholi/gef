@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,6 +9,7 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
+@DiscriminatorColumn(name = "TIPO_PESSOA")
 public class Pessoa extends Model{
 
 	private static final long serialVersionUID = 1L;

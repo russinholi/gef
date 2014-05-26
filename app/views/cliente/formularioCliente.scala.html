@@ -1,0 +1,30 @@
+@(formCliente: Form[model.Cliente])
+@import model._
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Cadastrar Cliente") {
+	@helper.form(routes.GerenciamentoCliente.persistirCliente, 'class -> "container form-horizontal") {
+		 <fieldset>
+		@inputText(formCliente("nome"), '_label -> "Nome") 
+		@inputText(formCliente("cpf"), '_label -> "CPF")
+		@inputText(formCliente("rg"), '_label -> "RG")
+		 <div class="control-group">
+		
+			@select(formCliente("endereco.uf"), options(
+			 scala.List("AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", 
+			 "MA", "MG", "MS", "MT", "PA", "PB", "PR", "PE", "PI", 
+			 "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO")),
+			  '_label -> "UF")
+			
+			@inputNumber(formCliente("endereco.cep"), '_label -> "CEP")
+			@inputText(formCliente("endereco.cidade"), '_label -> "Cidade")
+		</div>
+		 <div class="control-group">
+		@inputText(formCliente("endereco.logradouro"), '_label -> "Logradouro")
+		@inputNumber(formCliente("endereco.numero"), '_label -> "No.")
+		</div>		
+		</fieldset>
+		<input type="submit" value="Salvar"/>
+	}
+}

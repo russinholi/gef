@@ -1,0 +1,13 @@
+@(formFornecedor: Form[model.Fornecedor])
+@import model._
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Cadastrar Fornecedor") {
+	@helper.form(routes.GerenciamentoFornecedor.persistirFornecedor, 'class -> "container form-horizontal") {
+		@inputText(formFornecedor("nome"), '_label -> "Nome")
+		@inputText(formFornecedor("cnpj"), '_label -> "CNPJ")
+		@inputText(formFornecedor("ie"), '_label -> "IE")
+		<input type="submit" value="Salvar"/>
+	}
+}

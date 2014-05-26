@@ -3,6 +3,16 @@
 
 # --- !Ups
 
+create table cliente (
+  id                        integer not null,
+  nome                      varchar(255),
+  telefone                  varchar(255),
+  ativo                     boolean,
+  cpf                       varchar(255),
+  rg                        varchar(255),
+  constraint pk_cliente primary key (id))
+;
+
 create table endereco (
   id                        integer not null,
   logradouro                varchar(255),
@@ -21,6 +31,16 @@ create table fatura (
   parcela                   integer,
   constraint ck_fatura_situacao check (situacao in ('ABERTA','CANCELADA','PAGA')),
   constraint pk_fatura primary key (numero))
+;
+
+create table fornecedor (
+  id                        integer not null,
+  nome                      varchar(255),
+  telefone                  varchar(255),
+  ativo                     boolean,
+  cnpj                      varchar(255),
+  ie                        varchar(255),
+  constraint pk_fornecedor primary key (id))
 ;
 
 create table item_nota_fiscal (
@@ -96,9 +116,13 @@ create table usuario (
   constraint pk_usuario primary key (id))
 ;
 
+create sequence cliente_seq;
+
 create sequence endereco_seq;
 
 create sequence fatura_seq;
+
+create sequence fornecedor_seq;
 
 create sequence item_nota_fiscal_seq;
 
@@ -129,9 +153,13 @@ create index ix_retirada_produto_4 on retirada (produto_id);
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
+drop table if exists cliente;
+
 drop table if exists endereco;
 
 drop table if exists fatura;
+
+drop table if exists fornecedor;
 
 drop table if exists item_nota_fiscal;
 
@@ -149,9 +177,13 @@ drop table if exists usuario;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
+drop sequence if exists cliente_seq;
+
 drop sequence if exists endereco_seq;
 
 drop sequence if exists fatura_seq;
+
+drop sequence if exists fornecedor_seq;
 
 drop sequence if exists item_nota_fiscal_seq;
 

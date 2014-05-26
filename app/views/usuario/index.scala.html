@@ -1,12 +1,14 @@
 @(usuarios: List[model.Usuario])
 
+@import helper.twitterBootstrap._
+
 @main("Usuários") {
 
  	@if(usuarios.isEmpty){
 	    <h3>Não há usuários cadastrados</h3>
   	} else {
-    	<h3>Cupons Cadastrados:</h3>
-    	<table>
+    	<h3>Usuários Cadastrados:</h3>
+    	<table class="table table-striped table-hover">
       	<tr>
         	<th>Id</th>
         	<th>Login</th>
@@ -28,5 +30,5 @@
    		</table>
 	}	
 	<hr>
-  	<a href="@routes.GerenciamentoUsuario.formularioNovoUsuario">Novo usuário</a>
+  	<a class="btn" href="@routes.GerenciamentoUsuario.formularioNovoUsuario">Novo usuário</a>
 }

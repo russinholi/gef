@@ -9,10 +9,29 @@ GET     /                           controllers.Application.index()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 #Autenticação
-GET		/login/					controllers.GerenciamentoUsuario.login()
-POST	/login/					controllers.GerenciamentoUsuario.efetuarLogin()
+GET		/login					controllers.GerenciamentoUsuario.login()
+POST	/login					controllers.GerenciamentoUsuario.efetuarLogin()
 
 
-GET		/admin/					controllers.GerenciamentoUsuario.index()
+GET		/admin					controllers.GerenciamentoUsuario.index()
 GET		/admin/novo				controllers.GerenciamentoUsuario.formularioNovoUsuario()		
 POST	/admin/novo				controllers.GerenciamentoUsuario.persistirUsuario()
+
+GET		/cliente				controllers.GerenciamentoCliente.index()
+GET		/cliente/novo			controllers.GerenciamentoCliente.formularioNovoCliente()
+POST	/cliente				controllers.GerenciamentoCliente.persistirCliente()
+
+GET		/fornecedor				controllers.GerenciamentoFornecedor.index()
+GET		/fornecedor/novo		controllers.GerenciamentoFornecedor.formularioNovoFornecedor()
+POST	/fornecedor				controllers.GerenciamentoFornecedor.persistirFornecedor()
+
+GET		/produto				controllers.GerenciamentoEstoque.index()
+GET		/venda					controllers.GerenciamentoVenda.index()
+GET		/compra					controllers.GerenciamentoCompra.index()
+GET		/receber					controllers.GerenciamentoContasReceber.index()
+
+# Rota do Play2 CRUD
+->     /app             play.crud.Routes
+ 
+# Rota do Play2 CRUD - REST
+->     /api             play.rest.Routes

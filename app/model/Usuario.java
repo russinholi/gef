@@ -90,14 +90,5 @@ public class Usuario extends Model {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	
-	
-	public String validate() {
-		Usuario usuarioLogado = Ebean.find(Usuario.class).where().eq("login", getLogin()).eq("senha",getSenha()).findUnique();
-		if (usuarioLogado == null) {
-			System.out.println("putarmeda");
-			return "Usuário/Senha inválido.";
-		}
-		return null;
-	}
+		
 }

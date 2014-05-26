@@ -1,13 +1,14 @@
 @(formUsuario: Form[model.Usuario])
 @import model._
 @import helper._
+@import helper.twitterBootstrap._
 
 @main("Cadastrar Usuário") {
-	@helper.form(routes.GerenciamentoUsuario.persistirUsuario) {
+	@helper.form(routes.GerenciamentoUsuario.persistirUsuario, 'class -> "container form-horizontal") {
 		@inputText(formUsuario("nome"), '_label -> "Nome")
 		@inputText(formUsuario("cpf"), '_label -> "CPF")
 		@inputText(formUsuario("rg"), '_label -> "RG")
-		@inputText(formUsuario("percentualComissao"), '_label -> "% Comissão")
+		@inputNumber(formUsuario("percentualComissao"), '_label -> "% Comissão")
 		@inputText(formUsuario("login"), '_label -> "Login")
 		@inputPassword(formUsuario("senha"), '_label -> "Senha")
 		<input type="submit" value="Salvar"/>

@@ -5,15 +5,47 @@
 <html>
     <head>
         <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+		<script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>        
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
     </head>
-    <body>
-    <header>
-    	<img alt="GeF" src="@routes.Assets.at("images/logoGEF.jpg")" >
-    	<!--@session().get("login")-->
-    </header>
+    <body class="geral">
+	    <header class="cabecalho">
+	    	<img alt="GeF" src="@routes.Assets.at("images/logoGEF.png")" >
+	    	<div class="btn-toolbar">
+	    		<div class="btn-group">
+	    			<a class="btn" href="@routes.Application.index" >
+	    				<img class="img-rounded" height="75px" width="75px" alt="Início" src="@routes.Assets.at("images/inicio.png")" >
+	    			</a>
+	    			<a class="btn" href="@routes.GerenciamentoCliente.index" >
+	    				<img class="img-rounded" height="75px" width="75px" alt="Clientes" src="@routes.Assets.at("images/clientes.png")" >
+	    			</a>
+	    			<a class="btn" href="@routes.GerenciamentoFornecedor.index" >
+	    				<img class="img-rounded" height="75px" width="75px" alt="Fornecedores" src="@routes.Assets.at("images/fornecedores.png")" >
+	    			</a>
+	    			<a class="btn" href="@routes.GerenciamentoEstoque.index">
+	    				<img class="img-rounded" height="75px" width="75px" alt="Produtos" src="@routes.Assets.at("images/produtos.png")" >
+	    			</a>
+	    			<a class="btn" href="@routes.GerenciamentoEstoque.index">
+	    				<img class="img-rounded" height="75px" width="75px" alt="Medicamentos" src="@routes.Assets.at("images/medicamentos.png")" >
+	    			</a>
+	    			<a class="btn" href="@routes.GerenciamentoVenda.index" >
+	    				<img class="img-rounded" height="75px" width="75px" alt="Venda" src="@routes.Assets.at("images/vendas.png")" >
+	    			</a>
+	    			<a class="btn" href="@routes.GerenciamentoCompra.index" >
+	    				<img class="img-rounded" height="75px" width="75px" alt="Compra" src="@routes.Assets.at("images/compras.png")" >
+	    			</a>
+	    			<a class="btn" href="@routes.GerenciamentoContasReceber.index" >
+	    				<img class="img-rounded" height="75px" width="75px" alt="Contas a Receber" src="@routes.Assets.at("images/financeiro.png")" >
+	    			</a>
+	    			<a class="btn" href="@routes.GerenciamentoUsuario.index" >
+	    				<img class="img-rounded" height="75px" width="75px" alt="Usuarios" src="@routes.Assets.at("images/funcionarios.png")" >
+	    			</a>
+	    		</div>
+	    	</div>
+	    </header>
         @content
     </body>
 </html>
