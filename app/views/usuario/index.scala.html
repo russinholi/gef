@@ -1,0 +1,32 @@
+@(usuarios: List[model.Usuario])
+
+@main("Usuários") {
+
+ 	@if(usuarios.isEmpty){
+	    <h3>Não há usuários cadastrados</h3>
+  	} else {
+    	<h3>Cupons Cadastrados:</h3>
+    	<table>
+      	<tr>
+        	<th>Id</th>
+        	<th>Login</th>
+        	<th>Nome</th>
+        	<th>CPF</th>
+        	<th>RG</th>
+        	<th>% Comissão</th>
+      	</tr>
+    	@for(usuario <- usuarios){
+      	<tr>
+	        <td>@usuario.getId</td>
+    	    <td>@usuario.getLogin</td>
+    	    <td>@usuario.getNome</td>
+    	    <td>@usuario.getCpf</td>
+    	    <td>@usuario.getRg</td>
+        	<td>@usuario.getPercentualComissao %</td>
+      	</tr>
+	    }
+   		</table>
+	}	
+	<hr>
+  	<a href="@routes.GerenciamentoUsuario.formularioNovoUsuario">Novo usuário</a>
+}
