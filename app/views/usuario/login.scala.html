@@ -1,0 +1,16 @@
+@(formUsuario: Form[model.Usuario])
+@import model._
+@import helper._
+
+@main("Autenticação de Usuário") {
+	@if(formUsuario.hasGlobalErrors) {
+	    <p class="error">
+	        @formUsuario.globalError.message
+	    </p>
+	}
+	@helper.form(routes.GerenciamentoUsuario.efetuarLogin) {
+		@inputText(formUsuario("login"), '_label -> "Login")
+		@inputPassword(formUsuario("senha"), '_label -> "Senha")
+		<input type="submit" value="Entrar"/>
+	}
+}

@@ -3,13 +3,13 @@
 @import helper._
 
 @main("Cadastrar Usuário") {
-	@helper.form(routes.GerenciamentoUsuario.novoUsuario) {
+	@helper.form(routes.GerenciamentoUsuario.persistirUsuario) {
 		@inputText(formUsuario("nome"), '_label -> "Nome")
 		@inputText(formUsuario("cpf"), '_label -> "CPF")
 		@inputText(formUsuario("rg"), '_label -> "RG")
 		@inputText(formUsuario("percentualComissao"), '_label -> "% Comissão")
 		@inputText(formUsuario("login"), '_label -> "Login")
-		@inputText(formUsuario("senha"), '_label -> "Senha")
+		@inputPassword(formUsuario("senha"), '_label -> "Senha")
 		<input type="submit" value="Salvar"/>
 	}
 }
