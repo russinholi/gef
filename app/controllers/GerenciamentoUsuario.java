@@ -67,4 +67,5 @@ public class GerenciamentoUsuario extends Controller {
 			return redirect(routes.Application.index());
 		}
 	}
+	
 }

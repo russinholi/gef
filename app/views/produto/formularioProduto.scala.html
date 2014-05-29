@@ -1,0 +1,17 @@
+@(formProduto: Form[model.Produto])
+@import model._
+@import helper._
+
+@implicitField = @{ FieldConstructor(gefFieldConstructor.f) }
+
+@main("Cadastrar Produto") {
+	@helper.form(routes.GerenciamentoEstoque.persistirProduto, 'class -> "container well form-horizontal") {
+		@inputText(formProduto("codigoBarras"), '_label -> "Código de Barras")
+		@inputText(formProduto("nome"), '_label -> "Nome do Produto")
+		@inputText(formProduto("descricao"), '_label -> "Descrição")
+		@inputText(formProduto("apresentacao"), '_label -> "Apresentação")
+		@inputText(formProduto("Preço"), '_label -> "Preço")
+		
+		<input type="submit" value="Salvar"/>
+	}
+}

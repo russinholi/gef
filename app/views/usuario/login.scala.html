@@ -1,7 +1,6 @@
 @(formLogin: Form[controllers.GerenciamentoUsuario.Login])
 @import model._
 @import helper._
-@import helper.twitterBootstrap._
 
 @main("Autenticação de Usuário") {
 	@if(formLogin.hasGlobalErrors) {
@@ -9,7 +8,7 @@
 	        @formLogin.globalError.message
 	    </p>
 	}
-	@helper.form(routes.GerenciamentoUsuario.efetuarLogin, 'class -> "form-inline container") {
+	@helper.form(routes.GerenciamentoUsuario.efetuarLogin, 'class -> "container well form-horizontal") {
 		@inputText(formLogin("login"), '_label -> "Login")
 		@inputPassword(formLogin("senha"), '_label -> "Senha")
 		<input type="submit" value="Entrar"/>

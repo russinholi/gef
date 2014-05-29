@@ -21,3 +21,7 @@
 .table {
 	background-color: white;
 }
+
+.help-inline {
+	margin-left:-5px
+}

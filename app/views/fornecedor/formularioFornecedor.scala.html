@@ -3,8 +3,10 @@
 @import helper._
 @import helper.twitterBootstrap._
 
+@implicitField = @{ FieldConstructor(gefFieldConstructor.f) }
+
 @main("Cadastrar Fornecedor") {
-	@helper.form(routes.GerenciamentoFornecedor.persistirFornecedor, 'class -> "container form-horizontal") {
+	@helper.form(routes.GerenciamentoFornecedor.persistirFornecedor, 'class -> "container well form-horizontal") {
 		@inputText(formFornecedor("nome"), '_label -> "Nome")
 		@inputText(formFornecedor("cnpj"), '_label -> "CNPJ")
 		@inputText(formFornecedor("ie"), '_label -> "IE")

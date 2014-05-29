@@ -1,10 +1,11 @@
 @(formUsuario: Form[model.Usuario])
 @import model._
 @import helper._
-@import helper.twitterBootstrap._
+
+@implicitField = @{ FieldConstructor(gefFieldConstructor.f) }
 
 @main("Cadastrar Usuário") {
-	@helper.form(routes.GerenciamentoUsuario.persistirUsuario, 'class -> "container form-horizontal") {
+	@helper.form(routes.GerenciamentoUsuario.persistirUsuario, 'class -> "container well  form-horizontal") {
 		@inputText(formUsuario("nome"), '_label -> "Nome")
 		@inputText(formUsuario("cpf"), '_label -> "CPF")
 		@inputText(formUsuario("rg"), '_label -> "RG")

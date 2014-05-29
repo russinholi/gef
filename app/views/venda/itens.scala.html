@@ -1,0 +1,22 @@
+@(itens: List[controllers.GerenciamentoVenda.FormularioVenda] )
+
+<table class="table table-striped table-hover">
+	<tr>
+		<th>Código de Barras</th>
+		<th>Descrição</th>
+		<th>Preço Unitário</th>
+		<th>Quantidade</th>
+		<th>Desconto</th>
+		<th>Total</th>
+	</tr>
+	@for(item <- itens){
+	<tr>
+		<td>@item.produto</td>
+		<td>@item.descricao</td>
+		<td>@item.precoUnitario</td>
+		<td>@item.quantidade</td>
+		<td>@item.desconto</td>
+		<td>@item.precoTotal</td>
+	</tr>
+	}
+</table> 

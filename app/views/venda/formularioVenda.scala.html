@@ -1,0 +1,38 @@
+@(formVenda: Form[controllers.GerenciamentoVenda.FormularioVenda], dto: controllers.GerenciamentoVenda.FormularioVenda)
+@import model._
+@import helper._
+
+@implicitField = @{ FieldConstructor(gefFieldConstructor.f) }
+
+@main("Criar Venda") {
+
+	
+	@helper.form(routes.GerenciamentoVenda.persistirNotaFiscal, 'class -> "container well  form-horizontal") {
+		@inputText(formVenda("cpf"), '_label -> "CPF Cliente")
+		<div class="help-inline">
+			@inputText(formVenda("produto"), '_label -> "Produto")
+		</div>			
+		<div class="help-inline">
+			descrição
+		</div>			
+		<div class="help-inline">
+			@inputNumber(formVenda("precoUnitario"), '_label -> "Preço Unitário")
+		</div>			
+		<div class="help-inline">
+			@inputText(formVenda("quantidade"), '_label -> "Quantidade")
+		</div>			
+		<div class="help-inline">
+			@inputText(formVenda("desconto"), '_label -> "Desconto")
+		</div>			
+		<div class="help-inline">
+			@inputText(formVenda("precoTotal"), '_label -> "Preço Total")
+		</div>			
+		<div class="help-inline">
+			<input type="button" value="Adicionar"/>
+		</div>			
+		
+		 @views.html.venda.itens(dto.itens)
+		
+		<input type="submit" value="Finalizar"/>	
+	}
+}

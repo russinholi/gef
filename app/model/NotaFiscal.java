@@ -1,13 +1,17 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import play.db.ebean.Model;
@@ -27,6 +31,9 @@ public class NotaFiscal extends Model {
 	private ETipoOperacao tipo;
 	
 	private Date data;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "notaFiscal")
+	private List<ItemNotaFiscal> itens = new ArrayList<ItemNotaFiscal>();
 
 	public Integer getNumero() {
 		return numero;
@@ -56,5 +63,16 @@ public class NotaFiscal extends Model {
 		this.data = data;
 	}
 	
+	public List<ItemNotaFiscal> getItens() {
+		return itens;
+	}
+
+	public void addItem(ItemNotaFiscal item) {
+		if (!itens.contains(item)) {
+			itens.add(item);
+			item.setNotaFiscal(this);
+		}
+	}
 
 }
+ 
