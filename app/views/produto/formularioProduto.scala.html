@@ -5,12 +5,18 @@
 @implicitField = @{ FieldConstructor(gefFieldConstructor.f) }
 
 @main("Cadastrar Produto") {
+	@if(formProduto.hasErrors) {
+	    <p class="error container">
+	        @formProduto.errors
+	    </p>
+	}
+
 	@helper.form(routes.GerenciamentoEstoque.persistirProduto, 'class -> "container well form-horizontal") {
 		@inputText(formProduto("codigoBarras"), '_label -> "Código de Barras")
 		@inputText(formProduto("nome"), '_label -> "Nome do Produto")
 		@inputText(formProduto("descricao"), '_label -> "Descrição")
 		@inputText(formProduto("apresentacao"), '_label -> "Apresentação")
-		@inputText(formProduto("Preço"), '_label -> "Preço")
+		@inputText(formProduto("preco"), '_label -> "Preço")
 		
 		<input type="submit" value="Salvar"/>
 	}

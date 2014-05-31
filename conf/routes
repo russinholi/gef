@@ -5,9 +5,6 @@
 # Home page
 GET     /                           controllers.Application.index()
 
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
 #Autenticação
 GET		/login					controllers.GerenciamentoUsuario.login()
 POST	/login					controllers.GerenciamentoUsuario.efetuarLogin()
@@ -29,14 +26,16 @@ GET		/produto				controllers.GerenciamentoEstoque.index()
 GET		/produto/novo			controllers.GerenciamentoEstoque.formularioNovoProduto()
 POST	/produto/novo			controllers.GerenciamentoEstoque.persistirProduto()
 
+GET		/venda					controllers.GerenciamentoVenda.index()
 GET		/venda/nova				controllers.GerenciamentoVenda.formularioNovaVenda()
-POST	/venda/nova				controllers.GerenciamentoVenda.persistirNotaFiscal()
+POST	/venda/finalizar		controllers.GerenciamentoVenda.persistirNotaFiscal()
+POST	/venda/buscarProduto	controllers.GerenciamentoVenda.buscarProduto()
+GET		/venda/adicionarItem	controllers.GerenciamentoVenda.adicionarItem()
+GET		/venda/removerItem		controllers.GerenciamentoVenda.removerItem(produto: Long)
 
 GET		/compra					controllers.GerenciamentoCompra.index()
-GET		/receber				controllers.GerenciamentoContasReceber.index()
 
-# Rota do Play2 CRUD
-->     /app             play.crud.Routes
- 
-# Rota do Play2 CRUD - REST
-->     /api             play.rest.Routes
+GET     /assets/javascripts/routes      controllers.Application.javascriptRoutes()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

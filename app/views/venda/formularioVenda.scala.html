@@ -5,15 +5,20 @@
 @implicitField = @{ FieldConstructor(gefFieldConstructor.f) }
 
 @main("Criar Venda") {
-
+	@if(formVenda.hasErrors) {
+	    <p class="error container">
+	        @formVenda.errors
+	    </p>
+	}
+			
 	
-	@helper.form(routes.GerenciamentoVenda.persistirNotaFiscal, 'class -> "container well  form-horizontal") {
+	@helper.form(routes.GerenciamentoVenda.adicionarItem, 'class -> "container well  form-horizontal", 'id -> "formularioVenda") {
 		@inputText(formVenda("cpf"), '_label -> "CPF Cliente")
 		<div class="help-inline">
-			@inputText(formVenda("produto"), '_label -> "Produto")
+			@inputText(formVenda("produto"), '_label -> "Produto", 'onblur -> "buscarProduto(this);")
 		</div>			
 		<div class="help-inline">
-			descrição
+			@inputText(formVenda("nome"), '_label -> "Nome", 'readonly -> "true")
 		</div>			
 		<div class="help-inline">
 			@inputNumber(formVenda("precoUnitario"), '_label -> "Preço Unitário")
@@ -28,11 +33,11 @@
 			@inputText(formVenda("precoTotal"), '_label -> "Preço Total")
 		</div>			
 		<div class="help-inline">
-			<input type="button" value="Adicionar"/>
-		</div>			
-		
+			<button onclick="adicionarItem();">Adicionar</button>
+		</div>
+		<div id="itens">
 		 @views.html.venda.itens(dto.itens)
-		
+		</div>
 		<input type="submit" value="Finalizar"/>	
 	}
 }

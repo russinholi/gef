@@ -15,4 +15,13 @@ public class Application extends Controller {
         return ok(index.render("Your new application is ready."));
     }
 
+	public static Result javascriptRoutes() {       
+	    response().setContentType("text/javascript");
+	    return ok(Routes.javascriptRouter("jsRoutes",
+               controllers.routes.javascript.GerenciamentoVenda.buscarProduto(),
+               controllers.routes.javascript.GerenciamentoVenda.removerItem(),
+               controllers.routes.javascript.GerenciamentoVenda.adicionarItem()
+	            ));
+	}
+
 }

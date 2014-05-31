@@ -1,0 +1,29 @@
+@(notasVenda: List[model.NotaFiscal])
+
+@import helper.twitterBootstrap._
+
+@main("Vendas") {
+
+ 	@if(notasVenda.isEmpty){
+	    <h3>Não há vendas cadastradas</h3>
+  	} else {
+    	<h3>Vendas Cadastrados:</h3>
+    	<table class="table table-striped table-hover">
+      	<tr>
+        	<th>Número</th>
+        	<th>Data da Venda</th>
+        	<th>Cliente</th>
+        	<th>Valor total</th>
+      	</tr>
+    	@for(notaVenda <- notasVenda){
+      	<tr>
+	        <td>@notaVenda.getNumero</td>
+    	    <td>@notaVenda.getData</td>
+    	    <td>@notaVenda.getPessoa.getNome</td>
+    	    <td>@notaVenda.getValorTotal</td>
+      	</tr>
+	    }
+   		</table>
+	}	
+	<hr>
+}

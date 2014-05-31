@@ -74,5 +74,12 @@ public class NotaFiscal extends Model {
 		}
 	}
 
+	public Double getValorTotal() {
+		double valorTotal = 0;
+		for (ItemNotaFiscal item : itens) {
+			valorTotal += item.getValor();
+		}
+		return valorTotal;
+	}
 }
  
