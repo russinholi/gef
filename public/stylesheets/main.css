@@ -3,6 +3,11 @@
 	font-size: 10pt;
 }
 
+.success {
+	color: green;
+	font-size: 12pt;
+}
+
 .geral {
 	background-image:url("/assets/images/fundo.png");
 }

@@ -16,37 +16,43 @@
     <body class="geral">
 	    <header class="cabecalho">
 	    	<img alt="GeF" src="@routes.Assets.at("images/logoGEF.png")" >
-	    	<div class="btn-toolbar">
-	    		<div class="btn-group">
-	    			<a class="btn" href="@routes.Application.index" >
-	    				<img class="img-rounded" height="75px" width="75px" alt="Início" src="@routes.Assets.at("images/inicio.png")" >
-	    			</a>
-	    			<a class="btn" href="@routes.GerenciamentoCliente.index" >
-	    				<img class="img-rounded" height="75px" width="75px" alt="Clientes" src="@routes.Assets.at("images/clientes.png")" >
-	    			</a>
-	    			<a class="btn" href="@routes.GerenciamentoFornecedor.index" >
-	    				<img class="img-rounded" height="75px" width="75px" alt="Fornecedores" src="@routes.Assets.at("images/fornecedores.png")" >
-	    			</a>
-	    			<a class="btn" href="@routes.GerenciamentoEstoque.index">
-	    				<img class="img-rounded" height="75px" width="75px" alt="Produtos" src="@routes.Assets.at("images/produtos.png")" >
-	    			</a>
-	    			<a class="btn" href="@routes.GerenciamentoEstoque.index">
-	    				<img class="img-rounded" height="75px" width="75px" alt="Medicamentos" src="@routes.Assets.at("images/medicamentos.png")" >
-	    			</a>
-	    			<a class="btn" href="@routes.GerenciamentoVenda.formularioNovaVenda" >
-	    				<img class="img-rounded" height="75px" width="75px" alt="Venda" src="@routes.Assets.at("images/vendas.png")" >
-	    			</a>
-	    			<a class="btn" href="@routes.GerenciamentoCompra.index" >
-	    				<img class="img-rounded" height="75px" width="75px" alt="Compra" src="@routes.Assets.at("images/compras.png")" >
-	    			</a>
-	    			<a class="btn" href="@routes.GerenciamentoVenda.index" >
-	    				<img class="img-rounded" height="75px" width="75px" alt="Relatório de Vendas" src="@routes.Assets.at("images/relatorios.png")" >
-	    			</a>
-	    			<a class="btn" href="@routes.GerenciamentoUsuario.index" >
-	    				<img class="img-rounded" height="75px" width="75px" alt="Usuarios" src="@routes.Assets.at("images/funcionarios.png")" >
-	    			</a>
+	    	@if(session.get("login")!=null) {
+	    		<div class="help-inline">
+	    			@session.get("nomeUsuario") &nbsp; &nbsp;&nbsp;
+	    			<a href="@routes.GerenciamentoUsuario.logout()">Sair</a>
 	    		</div>
-	    	</div>
+		    	<div class="btn-toolbar">
+		    		<div class="btn-group">
+		    			<a class="btn" href="@routes.Application.index" >
+		    				<img class="img-rounded" height="75px" width="75px" alt="Início" src="@routes.Assets.at("images/inicio.png")" >
+		    			</a>
+		    			<a class="btn" href="@routes.GerenciamentoCliente.index" >
+		    				<img class="img-rounded" height="75px" width="75px" alt="Clientes" src="@routes.Assets.at("images/clientes.png")" >
+		    			</a>
+		    			<a class="btn" href="@routes.GerenciamentoFornecedor.index" >
+		    				<img class="img-rounded" height="75px" width="75px" alt="Fornecedores" src="@routes.Assets.at("images/fornecedores.png")" >
+		    			</a>
+		    			<a class="btn" href="@routes.GerenciamentoEstoque.index">
+		    				<img class="img-rounded" height="75px" width="75px" alt="Produtos" src="@routes.Assets.at("images/produtos.png")" >
+		    			</a>
+		    			<a class="btn" href="@routes.GerenciamentoEstoque.index">
+		    				<img class="img-rounded" height="75px" width="75px" alt="Medicamentos" src="@routes.Assets.at("images/medicamentos.png")" >
+		    			</a>
+		    			<a class="btn" href="@routes.GerenciamentoVenda.formularioNovaVenda" >
+		    				<img class="img-rounded" height="75px" width="75px" alt="Venda" src="@routes.Assets.at("images/vendas.png")" >
+		    			</a>
+		    			<a class="btn" href="@routes.GerenciamentoCompra.index" >
+		    				<img class="img-rounded" height="75px" width="75px" alt="Compra" src="@routes.Assets.at("images/compras.png")" >
+		    			</a>
+		    			<a class="btn" href="@routes.GerenciamentoVenda.index" >
+		    				<img class="img-rounded" height="75px" width="75px" alt="Relatório de Vendas" src="@routes.Assets.at("images/relatorios.png")" >
+		    			</a>
+		    			<a class="btn" href="@routes.GerenciamentoUsuario.index" >
+		    				<img class="img-rounded" height="75px" width="75px" alt="Usuarios" src="@routes.Assets.at("images/funcionarios.png")" >
+		    			</a>
+		    		</div>
+		    	</div>
+	    	}
 	    </header>
         @content
     </body>

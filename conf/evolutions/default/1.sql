@@ -3,16 +3,6 @@
 
 # --- !Ups
 
-create table cliente (
-  id                        integer not null,
-  nome                      varchar(255),
-  telefone                  varchar(255),
-  ativo                     boolean,
-  cpf                       varchar(255),
-  rg                        varchar(255),
-  constraint pk_cliente primary key (id))
-;
-
 create table endereco (
   id                        integer not null,
   logradouro                varchar(255),
@@ -31,16 +21,6 @@ create table fatura (
   parcela                   integer,
   constraint ck_fatura_situacao check (situacao in ('ABERTA','CANCELADA','PAGA')),
   constraint pk_fatura primary key (numero))
-;
-
-create table fornecedor (
-  id                        integer not null,
-  nome                      varchar(255),
-  telefone                  varchar(255),
-  ativo                     boolean,
-  cnpj                      varchar(255),
-  ie                        varchar(255),
-  constraint pk_fornecedor primary key (id))
 ;
 
 create table item_nota_fiscal (
@@ -65,7 +45,7 @@ create table lancamento (
 
 create table nota_fiscal (
   numero                    integer not null,
-  pessoa_id                 integer,
+  PESSOA_ID                 integer,
   tipo                      varchar(6),
   data                      timestamp,
   constraint ck_nota_fiscal_tipo check (tipo in ('COMPRA','VENDA')),
@@ -73,10 +53,16 @@ create table nota_fiscal (
 ;
 
 create table pessoa (
+  TIPO_PESSOA               varchar(31) not null,
   id                        integer not null,
   nome                      varchar(255),
+  endereco_id               integer,
   telefone                  varchar(255),
   ativo                     boolean,
+  cnpj                      varchar(255),
+  ie                        varchar(255),
+  cpf                       varchar(255),
+  rg                        varchar(255),
   constraint pk_pessoa primary key (id))
 ;
 
@@ -116,13 +102,9 @@ create table usuario (
   constraint pk_usuario primary key (id))
 ;
 
-create sequence cliente_seq;
-
 create sequence endereco_seq;
 
 create sequence fatura_seq;
-
-create sequence fornecedor_seq;
 
 create sequence item_nota_fiscal_seq;
 
@@ -142,10 +124,12 @@ alter table item_nota_fiscal add constraint fk_item_nota_fiscal_produto_1 foreig
 create index ix_item_nota_fiscal_produto_1 on item_nota_fiscal (produto_id);
 alter table item_nota_fiscal add constraint fk_item_nota_fiscal_notaFiscal_2 foreign key (nota_fiscal_numero) references nota_fiscal (numero) on delete restrict on update restrict;
 create index ix_item_nota_fiscal_notaFiscal_2 on item_nota_fiscal (nota_fiscal_numero);
-alter table nota_fiscal add constraint fk_nota_fiscal_pessoa_3 foreign key (pessoa_id) references pessoa (id) on delete restrict on update restrict;
-create index ix_nota_fiscal_pessoa_3 on nota_fiscal (pessoa_id);
-alter table retirada add constraint fk_retirada_produto_4 foreign key (produto_id) references produto (id) on delete restrict on update restrict;
-create index ix_retirada_produto_4 on retirada (produto_id);
+alter table nota_fiscal add constraint fk_nota_fiscal_pessoa_3 foreign key (PESSOA_ID) references pessoa (id) on delete restrict on update restrict;
+create index ix_nota_fiscal_pessoa_3 on nota_fiscal (PESSOA_ID);
+alter table pessoa add constraint fk_pessoa_endereco_4 foreign key (endereco_id) references endereco (id) on delete restrict on update restrict;
+create index ix_pessoa_endereco_4 on pessoa (endereco_id);
+alter table retirada add constraint fk_retirada_produto_5 foreign key (produto_id) references produto (id) on delete restrict on update restrict;
+create index ix_retirada_produto_5 on retirada (produto_id);
 
 
 
@@ -153,13 +137,9 @@ create index ix_retirada_produto_4 on retirada (produto_id);
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists cliente;
-
 drop table if exists endereco;
 
 drop table if exists fatura;
-
-drop table if exists fornecedor;
 
 drop table if exists item_nota_fiscal;
 
@@ -177,13 +157,9 @@ drop table if exists usuario;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
-drop sequence if exists cliente_seq;
-
 drop sequence if exists endereco_seq;
 
 drop sequence if exists fatura_seq;
-
-drop sequence if exists fornecedor_seq;
 
 drop sequence if exists item_nota_fiscal_seq;
 

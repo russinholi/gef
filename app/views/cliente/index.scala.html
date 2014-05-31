@@ -22,9 +22,9 @@
 	        <td>@cliente.getId</td>
     	    <td>@cliente.getNome</td>
     	    <td>@cliente.getCpf</td>
-    	    <td>@cliente.getEndereco().getCidade()</td>
+    	    <td>@cliente.getEndereco.getCidade</td>
     	    <td>@cliente.getTelefone</td>
-        	<td>@cliente.isAtivo ? "ATIVO" : "INATIVO" %</td>
+        	<td>@if(cliente.isAtivo){ ATIVO } else { INATIVO }</td>
       	</tr>
 	    }
    		</table>

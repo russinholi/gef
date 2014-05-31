@@ -36,6 +36,7 @@ public class GerenciamentoCliente extends Controller {
 			return badRequest(formularioCliente.render(form));
 		}
 		Cliente novoCliente = form.get();
+		novoCliente.setAtivo(true);
 		novoCliente.save();
 		return redirect(routes.GerenciamentoCliente.index());
 	}

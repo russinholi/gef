@@ -1,16 +1,21 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TIPO_PESSOA")
-public class Pessoa extends Model{
+public abstract class Pessoa extends Model{
 
 	private static final long serialVersionUID = 1L;
 
@@ -20,6 +25,7 @@ public class Pessoa extends Model{
 	@Required
 	private String nome;
 
+	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 
 	private String telefone;

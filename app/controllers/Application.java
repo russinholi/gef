@@ -19,9 +19,20 @@ public class Application extends Controller {
 	    response().setContentType("text/javascript");
 	    return ok(Routes.javascriptRouter("jsRoutes",
                controllers.routes.javascript.GerenciamentoVenda.buscarProduto(),
+               controllers.routes.javascript.GerenciamentoVenda.buscarCliente(),
                controllers.routes.javascript.GerenciamentoVenda.removerItem(),
                controllers.routes.javascript.GerenciamentoVenda.adicionarItem()
 	            ));
+	}
+	
+	public static void refreshSessaoUsuario() {
+		String login = session().get("login");
+		String nomeUsuario = session().get("nomeUsuario");
+		session().clear();
+    	if (login != null) {
+    		session("login",login);
+    		session("nomeUsuario", nomeUsuario);
+    	}
 	}
 
 }

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -25,6 +25,7 @@ public class NotaFiscal extends Model {
 	private Integer numero;
 
 	@OneToOne
+	@JoinColumn(name = "PESSOA_ID", nullable = false)
 	private Pessoa pessoa;
 
 	@Enumerated(EnumType.STRING)

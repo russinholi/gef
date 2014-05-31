@@ -12,28 +12,43 @@
 	}
 			
 	
-	@helper.form(routes.GerenciamentoVenda.adicionarItem, 'class -> "container well  form-horizontal", 'id -> "formularioVenda") {
-		@inputText(formVenda("cpf"), '_label -> "CPF Cliente")
+	@helper.form(routes.GerenciamentoVenda.persistirNotaFiscal, 'class -> "container well  form-horizontal", 'id -> "formularioVenda") {
+		<p class="success container">
+		        @flash.get("sucesso")
+		</p>
 		<div class="help-inline">
-			@inputText(formVenda("produto"), '_label -> "Produto", 'onblur -> "buscarProduto(this);")
+		<table>
+			<tr>
+			<td>
+				@inputText(formVenda("cpf"), '_label -> "CPF Cliente", 'onblur -> "buscarCliente();")
+			</td>
+			<td>
+				<span id="nomeCliente" ></span>
+			</td>
+			</tr>
+		</table>
+		</div>
+		<br>
+		<div class="help-inline">
+			@inputText(formVenda("produto"), '_label -> "Produto", 'onblur -> "buscarProduto();")
 		</div>			
 		<div class="help-inline">
 			@inputText(formVenda("nome"), '_label -> "Nome", 'readonly -> "true")
 		</div>			
 		<div class="help-inline">
-			@inputNumber(formVenda("precoUnitario"), '_label -> "Preço Unitário")
+			@inputNumber(formVenda("precoUnitario"), '_label -> "Preço Unitário", 'readonly -> "true")
 		</div>			
 		<div class="help-inline">
 			@inputText(formVenda("quantidade"), '_label -> "Quantidade")
 		</div>			
 		<div class="help-inline">
-			@inputText(formVenda("desconto"), '_label -> "Desconto")
+			@inputText(formVenda("desconto"), '_label -> "% Desconto", 'onblur -> "calcularPrecoTotal();")
 		</div>			
 		<div class="help-inline">
-			@inputText(formVenda("precoTotal"), '_label -> "Preço Total")
+			@inputText(formVenda("precoTotal"), '_label -> "Preço Total", 'readonly -> "true")
 		</div>			
 		<div class="help-inline">
-			<button onclick="adicionarItem();">Adicionar</button>
+			<input type="button" onclick="adicionarItem();" value="Adicionar"/>
 		</div>
 		<div id="itens">
 		 @views.html.venda.itens(dto.itens)

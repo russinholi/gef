@@ -1,6 +1,7 @@
 package controllers;
 
 import static play.data.Form.*;
+
 import java.util.ArrayList;
 
 import java.util.List;
@@ -67,5 +68,10 @@ public class GerenciamentoUsuario extends Controller {
 			return redirect(routes.Application.index());
 		}
 	}
-	
+
+	public static Result logout() {		 
+		session().clear();
+		return redirect(routes.Application.index());
+	}
+
 }
