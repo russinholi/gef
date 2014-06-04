@@ -1,0 +1,58 @@
+@(formCompra: Form[controllers.GerenciamentoCompra.FormularioCompra], dto: controllers.GerenciamentoCompra.FormularioCompra)
+@import model._
+@import helper._
+
+@implicitField = @{ FieldConstructor(gefFieldConstructor.f) }
+
+@main("Criar Compra") {
+	@if(formCompra.hasErrors) {
+	    <p class="error container">
+	        @formCompra.errors
+	    </p>
+	}
+			
+	
+	@helper.form(routes.GerenciamentoCompra.persistirNotaFiscal, 'class -> "container well  form-horizontal", 'id -> "formularioCompra") {
+		<p class="success container">
+		        @flash.get("sucesso")
+		</p>
+		<div class="help-inline">
+		<table>
+			<tr>
+			<td>
+				@inputText(formCompra("cnpj"), '_label -> "CNPJ Fornecedor", 'onblur -> "buscarFornecedor();")
+			</td>
+			<td>
+				<span id="nomeFornecedor" ></span>
+			</td>
+			</tr>
+		</table>
+		</div>
+		<br>
+		<div class="help-inline">
+			@inputText(formCompra("produto"), '_label -> "Produto", 'onblur -> "buscarProdutoCompra();")
+		</div>			
+		<div class="help-inline">
+			@inputText(formCompra("nome"), '_label -> "Nome", 'readonly -> "true")
+		</div>			
+		<div class="help-inline">
+			@inputNumber(formCompra("precoUnitario"), '_label -> "Preço Unitário", 'readonly -> "true")
+		</div>			
+		<div class="help-inline">
+			@inputText(formCompra("quantidade"), '_label -> "Quantidade")
+		</div>			
+		<div class="help-inline">
+			@inputText(formCompra("desconto"), '_label -> "% Desconto", 'onblur -> "calcularPrecoTotal();")
+		</div>			
+		<div class="help-inline">
+			@inputText(formCompra("precoTotal"), '_label -> "Preço Total", 'readonly -> "true")
+		</div>			
+		<div class="help-inline">
+			<input type="button" onclick="adicionarItemCompra();" value="Adicionar"/>
+		</div>
+		<div id="itens">
+		 @views.html.compra.itens(dto.itens)
+		</div>
+		<input type="submit" value="Finalizar"/>	
+	}
+}

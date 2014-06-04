@@ -51,3 +51,50 @@ function calcularPrecoTotal() {
 	var quantidade = $("#quantidade").val();
 	$("#precoTotal").val(precoUnitario * desconto * quantidade);
 }
+
+function buscarProdutoCompra() {
+    jsRoutes.controllers.GerenciamentoCompra.buscarProduto().ajax({
+        type: "POST",
+        data: $("#formularioCompra").serialize(),
+        success: function(response) {
+        	$("#nome").val(response.nomeProduto);
+        	$("#precoUnitario").val(response.precoProduto);
+        },
+        error: function(response) {         
+        }
+    });
+}
+
+function buscarFornecedor() {
+    jsRoutes.controllers.GerenciamentoCompra.buscarFornecedor().ajax({
+        type: "POST",
+        data: $("#formularioCompra").serialize(),
+        success: function(response) {
+        	$("#nomeFornecedor").html(response);
+        },
+        error: function(response) {         
+        }
+    });
+}
+
+function removerItemCompra(produto) {
+	jsRoutes.controllers.GerenciamentoCompra.removerItem(produto).ajax({
+		success: function(response) {
+			$("#itens").html(response);
+		},
+		error: function(response) {         
+		}
+	});
+}
+
+function adicionarItemCompra() {
+	jsRoutes.controllers.GerenciamentoCompra.adicionarItem().ajax({
+        type: "POST",
+        data: $("#formularioCompra").serialize(),
+		success: function(response) {
+			$("#itens").html(response);
+		},
+		error: function(response) {         
+		}
+	});
+}

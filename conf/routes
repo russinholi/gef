@@ -36,6 +36,12 @@ POST	/venda/adicionarItem	controllers.GerenciamentoVenda.adicionarItem()
 GET		/venda/removerItem		controllers.GerenciamentoVenda.removerItem(produto: Long)
 
 GET		/compra					controllers.GerenciamentoCompra.index()
+GET		/compra/nova			controllers.GerenciamentoCompra.formularioNovaCompra()
+POST	/compra/finalizar		controllers.GerenciamentoCompra.persistirNotaFiscal()
+POST	/compra/buscarProduto	controllers.GerenciamentoCompra.buscarProduto()
+POST	/compra/buscarCliente	controllers.GerenciamentoCompra.buscarFornecedor()
+POST	/compra/adicionarItem	controllers.GerenciamentoCompra.adicionarItem()
+GET		/compra/removerItem		controllers.GerenciamentoCompra.removerItem(produto: Long)
 
 GET     /assets/javascripts/routes      controllers.Application.javascriptRoutes()
 
