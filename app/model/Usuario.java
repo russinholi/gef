@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Query;
 
 import play.db.ebean.Model;
 
@@ -90,5 +91,9 @@ public class Usuario extends Model {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-		
+	
+	public static Query<Usuario> query() {
+		return Ebean.createQuery(Usuario.class);
+	}
+
 }

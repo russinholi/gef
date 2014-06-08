@@ -21,7 +21,7 @@ public class GerenciamentoUsuario extends Controller {
 		public String senha;
 
 		public String validate() {
-			Usuario usuarioLogado = Ebean.find(Usuario.class).where().eq("login", login).eq("senha",senha).findUnique();
+			Usuario usuarioLogado = Usuario.query().where().eq("login", login).eq("senha",senha).findUnique();
 			if (usuarioLogado == null) {
 				return "Usuário/Senha inválido.";
 			}
@@ -61,7 +61,7 @@ public class GerenciamentoUsuario extends Controller {
 			return badRequest(login.render(form));
 		} else {
 			Login dadosLogin = form.get();
-			Usuario usuarioLogado = Ebean.find(Usuario.class).where().eq("login", dadosLogin.login).eq("senha",dadosLogin.senha).findUnique();
+			Usuario usuarioLogado = Usuario.query().where().eq("login", dadosLogin.login).eq("senha",dadosLogin.senha).findUnique();
 			session().clear();
 			session("login",usuarioLogado.getLogin());
 			session("nomeUsuario", usuarioLogado.getNome());

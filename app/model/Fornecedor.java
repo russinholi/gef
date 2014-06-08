@@ -3,6 +3,9 @@ package model;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Query;
+
 import play.data.validation.Constraints.Required;
 
 @Entity
@@ -30,6 +33,10 @@ public class Fornecedor extends Pessoa {
 
 	public void setIe(String ie) {
 		this.ie = ie;
+	}
+
+	public static Query<Fornecedor> query() {
+		return Ebean.createQuery(Fornecedor.class);
 	}
 
 	

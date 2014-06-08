@@ -6,6 +6,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Query;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -52,6 +55,10 @@ public class Lancamento extends Model {
 
 	public void setFormaPagamento(EFormaPagamento formaPagamento) {
 		this.formaPagamento = formaPagamento;
+	}
+
+	public static Query<Lancamento> query() {
+		return Ebean.createQuery(Lancamento.class);
 	}
 
 }

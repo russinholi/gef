@@ -21,7 +21,11 @@ public class Application extends Controller {
                controllers.routes.javascript.GerenciamentoVenda.buscarProduto(),
                controllers.routes.javascript.GerenciamentoVenda.buscarCliente(),
                controllers.routes.javascript.GerenciamentoVenda.removerItem(),
-               controllers.routes.javascript.GerenciamentoVenda.adicionarItem()
+               controllers.routes.javascript.GerenciamentoVenda.adicionarItem(),
+               controllers.routes.javascript.GerenciamentoCompra.buscarProduto(),
+               controllers.routes.javascript.GerenciamentoCompra.buscarFornecedor(),
+               controllers.routes.javascript.GerenciamentoCompra.removerItem(),
+               controllers.routes.javascript.GerenciamentoCompra.adicionarItem()
 	            ));
 	}
 	

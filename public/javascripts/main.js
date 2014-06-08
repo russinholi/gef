@@ -72,7 +72,7 @@ function buscarFornecedor() {
         success: function(response) {
         	$("#nomeFornecedor").html(response);
         },
-        error: function(response) {         
+        error: function(response) {
         }
     });
 }

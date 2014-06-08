@@ -12,6 +12,7 @@ import model.ETipoOperacao;
 import model.ItemNotaFiscal;
 import model.NotaFiscal;
 import model.Produto;
+import model.Usuario;
 import play.Routes;
 import play.data.Form;
 import play.libs.Json;
@@ -20,6 +21,7 @@ import play.mvc.Result;
 import views.html.venda.*;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.ExpressionList;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -31,7 +33,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class GerenciamentoVenda extends Controller {
 
 	public static Result index() {
-		List<NotaFiscal> notasVenda = Ebean.find(NotaFiscal.class).where().eq("tipo", ETipoOperacao.VENDA).findList();
+		List<NotaFiscal> notasVenda = NotaFiscal.query().where().eq("tipo", ETipoOperacao.VENDA).findList();
 		return ok(index.render(notasVenda));
 	}
 
@@ -47,7 +49,7 @@ public class GerenciamentoVenda extends Controller {
 		String nomeProduto = "";
 		Double precoProduto = 0.0;
 		if (dto.produto != null) {
-			Produto produto = Ebean.createQuery(Produto.class).where().eq("codigoBarras", dto.produto).findUnique();
+			Produto produto = Produto.query().where().eq("codigoBarras", dto.produto).findUnique();
 			if (produto != null) {
 				nomeProduto = produto.getNome();
 				precoProduto = produto.getPreco();
@@ -65,7 +67,7 @@ public class GerenciamentoVenda extends Controller {
 		FormularioVenda dto = formulario.get();
 		String retorno = ""; 
 		if (dto.cpf != null) {
-			Cliente cliente = Ebean.createQuery(Cliente.class).where().eq("cpf", dto.cpf).findUnique();
+			Cliente cliente = Cliente.query().where().eq("cpf", dto.cpf).findUnique();
 			if (cliente != null) {
 				retorno = cliente.getNome();
 			}
@@ -77,14 +79,14 @@ public class GerenciamentoVenda extends Controller {
 	public static Result persistirNotaFiscal() {
 		Form<FormularioVenda> formulario = Form.form(FormularioVenda.class).bindFromRequest();
 		FormularioVenda dto = criarOuObterDTOVendaSessao();
-		Cliente cliente = Ebean.createQuery(Cliente.class).where().eq("cpf", dto.cpf).findUnique();
+		Cliente cliente = Cliente.query().where().eq("cpf", dto.cpf).findUnique();
 		NotaFiscal notaFiscal = new NotaFiscal();
 		notaFiscal.setPessoa(cliente);
 		notaFiscal.setTipo(ETipoOperacao.VENDA);
 		notaFiscal.setData(new Date());
 		for (FormularioVenda item : dto.itens){
 			ItemNotaFiscal itemNotaFiscal = new ItemNotaFiscal();
-			Produto produto = Ebean.createQuery(Produto.class).where().eq("codigoBarras", dto.produto).findUnique();
+			Produto produto = GerenciamentoEstoque.baixarEstoque(item.produto, item.quantidade);
 			itemNotaFiscal.setProduto(produto);
 			itemNotaFiscal.setQuantidade(item.quantidade);
 			itemNotaFiscal.setValor(item.precoTotal);
@@ -175,5 +177,16 @@ public class GerenciamentoVenda extends Controller {
 		public Double precoTotal;
 		
 		public List<FormularioVenda> itens = new ArrayList<FormularioVenda>();
+
+		public String validate() {
+			if(produto != null && quantidade != null) {
+				Produto produtoPersistido = Produto.query().where().eq("codigoBarras", produto).findUnique();
+				if (produtoPersistido.getQuantidade() < quantidade) {
+					return "Quantidade indisponível no estoque para o produto: "+produtoPersistido.getNome();
+				}
+			}
+			return null;
+		}
+
 	}
 }

@@ -26,6 +26,9 @@ POST	/fornecedor/novo		controllers.GerenciamentoFornecedor.persistirFornecedor()
 GET		/produto				controllers.GerenciamentoEstoque.index()
 GET		/produto/novo			controllers.GerenciamentoEstoque.formularioNovoProduto()
 POST	/produto/novo			controllers.GerenciamentoEstoque.persistirProduto()
+GET		/medicamento			controllers.GerenciamentoEstoque.indexMedicamento()
+GET		/medicamento/novo		controllers.GerenciamentoEstoque.formularioMedicamento()
+
 
 GET		/venda					controllers.GerenciamentoVenda.index()
 GET		/venda/nova				controllers.GerenciamentoVenda.formularioNovaVenda()

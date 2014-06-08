@@ -34,6 +34,7 @@ public class GerenciamentoFornecedor extends Controller {
 			return badRequest(formularioFornecedor.render(form));
 		}
 		Fornecedor novoFornecedor = form.get();
+		novoFornecedor.setAtivo(true);
 		novoFornecedor.save();
 		return redirect(routes.GerenciamentoFornecedor.index());
 	}

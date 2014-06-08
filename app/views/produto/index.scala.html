@@ -1,13 +1,18 @@
-@(produtos: List[model.Produto])
+@(produtos: List[model.Produto], tipoProduto: model.ETipoProduto)
 
 @import helper.twitterBootstrap._
+@import model.ETipoProduto
 
 @main("Produtos") {
 
  	@if(produtos.isEmpty){
 	    <h3>Não há produtos cadastrados</h3>
   	} else {
-    	<h3>Produtos Cadastrados:</h3>
+	    @if(tipoProduto.equals(ETipoProduto.MEDICAMENTO)) {
+    		<h3>Medicamentos Cadastrados:</h3>
+    	} else {
+    		<h3>Produtos Cadastrados:</h3>
+    	}
     	<table class="table table-striped table-hover">
       	<tr>
         	<th>Id</th>
@@ -16,6 +21,11 @@
         	<th>Descrição</th>
         	<th>Apresentação</th>
         	<th>Preço</th>
+        	<th>Quantidade</th>
+        	@if(tipoProduto.equals(ETipoProduto.MEDICAMENTO)) {
+	        	<th>Tipo de Medicamento</th>
+	        	<th>Tipo de Controle</th>
+        	}
       	</tr>
     	@for(produto <- produtos){
       	<tr>
@@ -24,11 +34,20 @@
     	    <td>@produto.getNome</td>
     	    <td>@produto.getDescricao</td>
     	    <td>@produto.getApresentacao</td>
-        	<td>@produto.getPreco %</td>
+        	<td>R$ @produto.getPreco</td>
+        	<td>@produto.getQuantidade</td>
+        	@if(tipoProduto.equals(ETipoProduto.MEDICAMENTO)) {
+	    	    <td>@produto.getTipoMedicamento</td>
+    		    <td>@produto.getTipoControle</td>
+        	}
       	</tr>
 	    }
    		</table>
 	}	
 	<hr>
-  	<a class="btn" href="@routes.GerenciamentoEstoque.formularioNovoProduto">Novo produto</a>
+    @if(tipoProduto.equals(ETipoProduto.MEDICAMENTO)) {
+  		<a class="btn" href="@routes.GerenciamentoEstoque.formularioMedicamento">Novo medicamento</a>
+    } else {
+  		<a class="btn" href="@routes.GerenciamentoEstoque.formularioNovoProduto">Novo produto</a>
+  	}
 }

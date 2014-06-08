@@ -73,9 +73,11 @@ create table produto (
   descricao                 varchar(255),
   apresentacao              varchar(255),
   preco                     double,
+  tipo_produto              varchar(11),
   tipo_medicamento          varchar(10),
   tipo_controle             varchar(14),
   quantidade                integer,
+  constraint ck_produto_tipo_produto check (tipo_produto in ('PRODUTO','MEDICAMENTO')),
   constraint ck_produto_tipo_medicamento check (tipo_medicamento in ('COMPRIMIDO','XAROPE','POMADA','COLIRIO')),
   constraint ck_produto_tipo_controle check (tipo_controle in ('SEM_CONTROLE','TARJA_VERMELHA','TARJA_PRETA','ANTIBIOTICO')),
   constraint pk_produto primary key (id))

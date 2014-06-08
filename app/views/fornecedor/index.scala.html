@@ -12,7 +12,8 @@
       	<tr>
         	<th>Id</th>
         	<th>Nome</th>
-        	<th>CPF</th>
+        	<th>CNPJ</th>
+        	<th>IE</th>
         	<th>Cidade</th>
         	<th>Telefone</th>
         	<th>Situação</th>
@@ -23,9 +24,9 @@
     	    <td>@fornecedor.getNome</td>
     	    <td>@fornecedor.getCnpj</td>
     	    <td>@fornecedor.getIe</td>
-    	    <td>@fornecedor.getEndereco().getCidade()</td>
+    	    <td>@fornecedor.getEndereco.getCidade</td>
     	    <td>@fornecedor.getTelefone</td>
-        	<td>@fornecedor.isAtivo ? "ATIVO" : "INATIVO" %</td>
+        	<td>@if(fornecedor.isAtivo){ ATIVO } else { INATIVO }</td>
       	</tr>
 	    }
    		</table>

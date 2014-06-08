@@ -6,6 +6,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Query;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -28,6 +31,9 @@ public class Produto extends Model {
 
 	@Required
 	private Double preco;
+
+	@Enumerated(EnumType.STRING)
+	private ETipoProduto tipoProduto;
 
 	@Enumerated(EnumType.STRING)
 	private ETipoMedicamento tipoMedicamento;
@@ -77,6 +83,14 @@ public class Produto extends Model {
 		this.preco = preco;
 	}
 
+	public ETipoProduto getTipoProduto() {
+		return tipoProduto;
+	}
+
+	public void setTipoProduto(ETipoProduto tipoProduto) {
+		this.tipoProduto = tipoProduto;
+	}
+
 	public ETipoMedicamento getTipoMedicamento() {
 		return tipoMedicamento;
 	}
@@ -104,4 +118,9 @@ public class Produto extends Model {
 	public int getId() {
 		return id;
 	}	
+	
+	public static Query<Produto> query() {
+		return Ebean.createQuery(Produto.class);
+	}
+
 }

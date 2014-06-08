@@ -3,6 +3,9 @@ package model;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Query;
+
 @Entity
 @DiscriminatorValue("C")
 public class Cliente extends Pessoa {
@@ -29,4 +32,7 @@ public class Cliente extends Pessoa {
 		this.rg = rg;
 	}
 
+	public static Query<Cliente> query() {
+		return Ebean.createQuery(Cliente.class);
+	}
 }

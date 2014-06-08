@@ -7,9 +7,14 @@
 @main("Cadastrar Cliente") {
 	@helper.form(routes.GerenciamentoCliente.persistirCliente, 'class -> "container well form-horizontal") {
 		@inputText(formCliente("nome"), '_label -> "Nome", '_class -> "inline")
+		<div class="help-inline">
 		@inputText(formCliente("cpf"), '_label -> "CPF")
+		</div>
+		<div class="help-inline">
 		@inputText(formCliente("rg"), '_label -> "RG")
+		</div>		
 		
+		<div></div>
 		<div class="help-inline">
 		@select(formCliente("endereco.uf"), options(
 			 scala.List("AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", 
@@ -18,15 +23,24 @@
 			  '_label -> "UF")
 		</div>			
 		<div class="help-inline">
-		@inputNumber(formCliente("endereco.cep"), '_label -> "CEP")
-		</div>			
-		<div class="help-inline">
 		@inputText(formCliente("endereco.cidade"), '_label -> "Cidade")
 		</div>
-		@inputText(formCliente("endereco.logradouro"), '_label -> "Logradouro")
-		@inputNumber(formCliente("endereco.numero"), '_label -> "No.")
-	            <div class="controls">
-		<input type="submit" value="Salvar"/>
+		<div class="help-inline">
+		@inputNumber(formCliente("endereco.cep"), '_label -> "CEP")
 		</div>
+		
+		<div></div>
+		
+		<div class="help-inline">					
+		@inputText(formCliente("endereco.logradouro"), '_label -> "Logradouro")
+		</div>
+		<div class="help-inline">
+		@inputNumber(formCliente("endereco.numero"), '_label -> "No.")
+		</div>
+		@inputText(formCliente("telefone"), '_label -> "Telefone")
+		
+		<br/>
+        <input type="submit" value="Salvar"/>
+		
 	}
 }

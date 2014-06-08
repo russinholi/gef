@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Query;
+
 import play.db.ebean.Model;
 
 @Entity
@@ -82,5 +85,10 @@ public class NotaFiscal extends Model {
 		}
 		return valorTotal;
 	}
+	
+	public static Query<NotaFiscal> query() {
+		return Ebean.createQuery(NotaFiscal.class);
+	}
+
 }
  

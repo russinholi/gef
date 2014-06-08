@@ -28,7 +28,7 @@ import views.html.compra.*;
 public class GerenciamentoCompra extends Controller {
 
 	public static Result index() {
-		List<NotaFiscal> notasCompra = Ebean.find(NotaFiscal.class).where().eq("tipo", ETipoOperacao.VENDA).findList();
+		List<NotaFiscal> notasCompra = NotaFiscal.query().where().eq("tipo", ETipoOperacao.VENDA).findList();
 		return ok(index.render(notasCompra));
 	}
 
@@ -44,7 +44,7 @@ public class GerenciamentoCompra extends Controller {
 		String nomeProduto = "";
 		Double precoProduto = 0.0;
 		if (dto.produto != null) {
-			Produto produto = Ebean.createQuery(Produto.class).where().eq("codigoBarras", dto.produto).findUnique();
+			Produto produto = Produto.query().where().eq("codigoBarras", dto.produto).findUnique();
 			if (produto != null) {
 				nomeProduto = produto.getNome();
 				precoProduto = produto.getPreco();
@@ -62,9 +62,9 @@ public class GerenciamentoCompra extends Controller {
 		FormularioCompra dto = formulario.get();
 		String retorno = ""; 
 		if (dto.cnpj != null) {
-			Fornecedor cliente = Ebean.createQuery(Fornecedor.class).where().eq("cnpj", dto.cnpj).findUnique();
-			if (cliente != null) {
-				retorno = cliente.getNome();
+			Fornecedor fornecedor = Fornecedor.query().where().eq("cnpj", dto.cnpj).findUnique();
+			if (fornecedor != null) {
+				retorno = fornecedor.getNome();
 			}
 		}
 		
@@ -74,14 +74,14 @@ public class GerenciamentoCompra extends Controller {
 	public static Result persistirNotaFiscal() {
 		Form<FormularioCompra> formulario = Form.form(FormularioCompra.class).bindFromRequest();
 		FormularioCompra dto = criarOuObterDTOCompraSessao();
-		Fornecedor cliente = Ebean.createQuery(Fornecedor.class).where().eq("cnpj", dto.cnpj).findUnique();
+		Fornecedor cliente = Fornecedor.query().where().eq("cnpj", dto.cnpj).findUnique();
 		NotaFiscal notaFiscal = new NotaFiscal();
 		notaFiscal.setPessoa(cliente);
 		notaFiscal.setTipo(ETipoOperacao.COMPRA);
 		notaFiscal.setData(new Date());
 		for (FormularioCompra item : dto.itens){
 			ItemNotaFiscal itemNotaFiscal = new ItemNotaFiscal();
-			Produto produto = Ebean.createQuery(Produto.class).where().eq("codigoBarras", dto.produto).findUnique();
+			Produto produto = GerenciamentoEstoque.incluirNoEstoque(item.produto, item.quantidade);
 			itemNotaFiscal.setProduto(produto);
 			itemNotaFiscal.setQuantidade(item.quantidade);
 			itemNotaFiscal.setValor(item.precoTotal);
